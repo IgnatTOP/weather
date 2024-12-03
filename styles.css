@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
+@font-face {
+    font-family: 'DejaVu Sans';
+    src: url('fonts/DejaVuSans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --primary-bg: #0f172a;
     --card-bg: rgba(30, 41, 59, 0.7);
@@ -23,7 +31,7 @@
 }
 
 body {
-    font-family: var(--font-primary);
+    font-family: var(--font-primary), "DejaVu Sans", sans-serif;
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     color: var(--text-primary);
     min-height: 100vh;
