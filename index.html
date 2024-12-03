@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div id="loader" class="loader-container">
+            <div class="loader">
+                <div class="loader-icon">🌤</div>
+                <div class="loader-text">Загрузка данных...</div>
+            </div>
+        </div>
+        <header>
+            <div class="logo">SkyCast</div>
+            <nav class="nav-links">
+                <a href="#" class="active">Погода</a>
+                <a href="#about">О нас</a>
+            </nav>
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="Поиск города...">
+                    <div class="search-icon">🔍</div>
+                </div>
+                <div id="searchSuggestions" class="search-suggestions"></div>
+            </div>
+        </header>
+
+        <main>
+            <section class="current-weather-card">
+                <div class="city-background"></div>
+                <div class="main-info">
+                    <div class="temperature-container">
+                        <h1 id="currentTemperature">-3°C</h1>
+                        <p id="currentCity">Москва</p>
+                        <p id="currentDate">Сегодня, 13 марта</p>
+                    </div>
+                    <div class="current-condition">
+                        <img id="currentWeatherIcon" src="" alt="Weather Icon" class="weather-icon">
+                        <p id="currentWeatherDescription">Ясно</p>
+                    </div>
+                </div>
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <span class="icon">💨</span>
+                        <span class="label">Ветер</span>
+                        <span id="currentWindSpeed" class="value">5 м/с</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">💧</span>
+                        <span class="label">Влажность</span>
+                        <span id="currentHumidity" class="value">60%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">🌡️</span>
+                        <span class="label">Давление</span>
+                        <span id="currentPressure" class="value">750 мм</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">🌅</span>
+                        <span class="label">Восход</span>
+                        <span id="sunrise" class="value">--:--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">🌇</span>
+                        <span class="label">Закат</span>
+                        <span id="sunset" class="value">--:--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">☀️</span>
+                        <span class="label">УФ индекс</span>
+                        <span id="uvIndex" class="value">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">👁️</span>
+                        <span class="label">Видимость</span>
+                        <span id="visibility" class="value">- км</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">🌡️</span>
+                        <span class="label">Ощущается как</span>
+                        <span id="feelsLike" class="value">-°C</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="hourly-forecast-section">
+                <h2>Почасовой прогноз</h2>
+                <div class="hourly-forecast-container">
+                    <div class="hourly-scroll" id="hourlyForecast">
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section class="forecast-section">
+                <h2>Прогноз на 7 дней</h2>
+                <div class="forecast-cards" id="forecastCards">
+                   
+                </div>
+            </section>
+
+            <section id="about" class="about-section">
+                <div class="about-content">
+                    <h2>О проекте SkyCast</h2>
+                    <div class="about-grid">
+                        <div class="about-card">
+                            <div class="about-icon">🌍</div>
+                            <h3>Точные данные</h3>
+                            <p>Мы используем надежные источники данных о погоде для предоставления точной информации в режиме реального времени.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">🎯</div>
+                            <h3>Простота использования</h3>
+                            <p>Интуитивно понятный интерфейс делает получение информации о погоде быстрым и удобным.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">📱</div>
+                            <h3>Всегда доступно</h3>
+                            <p>Приложение адаптировано для всех устройств и работает в любом современном браузере.</p>
+                        </div>
+                    </div>
+
+                    <div class="weather-facts-slider">
+                        <h3>Интересные факты о погоде</h3>
+                        <div class="slider-container">
+                            <button class="slider-button prev">❮</button>
+                            <div class="slider-track">
+                                <div class="fact-slide">
+                                    <div class="fact-icon">⚡️</div>
+                                    <h4>Молнии</h4>
+                                    <p>Каждую секунду по всему миру происходит около 100 ударов молний.</p>
+                                </div>
+                                <div class="fact-slide">
+                                    <div class="fact-icon">🌈</div>
+                                    <h4>Радуга</h4>
+                                    <p>Радуга всегда появляется на угле 42 градуса от линии между вами и солнцем.</p>
+                                </div>
+                                <div class="fact-slide">
+                                    <div class="fact-icon">❄️</div>
+                                    <h4>Снежинки</h4>
+                                    <p>Не существует двух абсолютно одинаковых снежинок в природе.</p>
+                                </div>
+                                <div class="fact-slide">
+                                    <div class="fact-icon">🌪</div>
+                                    <h4>Торнадо</h4>
+                                    <p>Самый быстрый торнадо развивал скорость более 480 километров в час.</p>
+                                </div>
+                                <div class="fact-slide">
+                                    <div class="fact-icon">🌧</div>
+                                    <h4>Дождь</h4>
+                                    <p>Самые тяжелые капли дождя могут падать со скоростью до 30 километров в час.</p>
+                                </div>
+                                <div class="fact-slide">
+                                    <div class="fact-icon">☁️</div>
+                                    <h4>Облака</h4>
+                                    <p>Средне-размерное кучевое облако весит около 500 тонн благодаря содержащейся в нем воде.</p>
+                                </div>
+                                <div class="fact-slide">
+                                    <div class="fact-icon">🌡️</div>
+                                    <h4>Температура</h4>
+                                    <p>Самая высокая температура на Земле была зафиксирована в Долине Смерти: 56.7°C.</p>
+                                </div>
+                                <div class="fact-slide">
+                                    <div class="fact-icon">❄️</div>
+                                    <h4>Холод</h4>
+                                    <p>Самая низкая температура на Земле: -89.2°C, зафиксирована в Антарктиде.</p>
+                                </div>
+                            </div>
+                            <button class="slider-button next">❯</button>
+                        </div>
+                        <div class="slider-dots"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
