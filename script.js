@@ -608,14 +608,9 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
         link.classList.add('active');
 
-        if (link.getAttribute('href') !== '#') {
+        // Если это не внешняя ссылка (about.html), то предотвращаем действие по умолчанию
+        if (link.getAttribute('href') === '#') {
             e.preventDefault();
-            const targetId = link.getAttribute('href').slice(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        } else {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     });

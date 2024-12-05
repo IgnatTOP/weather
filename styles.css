@@ -495,99 +495,52 @@ main {
 }
 
 .weather-facts-slider {
-    margin-top: 60px;
-    padding: 40px 0;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    overflow: hidden;
+    margin-top: 50px;
+    padding: 30px 0;
+}
+
+.weather-facts-slider h3 {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 30px;
 }
 
 .slider-container {
     position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 0 40px;
-    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1000px;
 }
 
 .slider-track {
     display: flex;
+    gap: 20px;
     transition: transform 0.5s ease;
-    margin: 0 -10px;
+    padding: 10px 0;
 }
 
-.fact-slide {
-    flex: 0 0 calc(33.333% - 20px);
-    margin: 0 10px;
+.fact-card {
     background: rgba(255, 255, 255, 0.1);
     padding: 25px;
-    border-radius: 15px;
-    text-align: center;
+    border-radius: 16px;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease;
-    box-sizing: border-box;
-}
-
-.weather-facts-slider h3 {
-    padding: 0 0 30px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
     text-align: center;
-    font-size: 24px;
-    color: var(--text-primary);
 }
 
-@media (max-width: 768px) {
-    .app-container {
-        padding: 0.5rem;
-        width: 95%;
-        margin: 0 auto;
-    }
-
-    .search-container {
-        width: 90%;
-    }
-
-    main {
-        padding: 10px 15px;
-        width: 100%;
-    }
-
-    .weather-card {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-    .weather-facts-slider {
-        padding: 30px 0;
-    }
-
-    .slider-container {
-        padding: 0 30px;
-    }
-
-    .fact-slide {
-        flex: 0 0 calc(100% - 20px);
-    }
-
-    .slider-track {
-        margin: 0 -10px;
-    }
-
-    .slider-button {
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .fact-slide {
-        flex: 0 0 calc(50% - 20px);
-    }
-}
-
-.fact-slide:hover {
+.fact-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.fact-content {
+    width: 100%;
 }
 
 .fact-icon {
@@ -595,6 +548,20 @@ main {
     margin-bottom: 15px;
     display: inline-block;
     animation: float 3s ease-in-out infinite;
+}
+
+.fact-card h4 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.fact-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
 }
 
 @keyframes float {
@@ -606,36 +573,22 @@ main {
     }
 }
 
-.fact-slide h4 {
-    color: white;
-    font-size: 18px;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.fact-slide p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
-    line-height: 1.6;
-}
-
 .slider-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
     font-size: 20px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
     z-index: 2;
 }
 
@@ -644,32 +597,42 @@ main {
 }
 
 .slider-button.prev {
-    left: 5px;
+    left: 0;
 }
 
 .slider-button.next {
-    right: 5px;
+    right: 0;
 }
 
-.slider-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-}
+@media (max-width: 768px) {
+    .slider-container {
+        padding: 0 30px;
+    }
 
-.slider-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+    .fact-card {
+        padding: 20px;
+        min-height: 180px;
+    }
 
-.slider-dot.active {
-    background: white;
-    transform: scale(1.2);
+    .fact-icon {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .fact-card h4 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .fact-card p {
+        font-size: 14px;
+    }
+
+    .slider-button {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
 }
 
 .nav-links {
