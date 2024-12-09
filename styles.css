@@ -41,10 +41,20 @@ body {
 
 .app-container {
     min-height: 100vh;
-    padding: 0;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+main {
+    flex: 1;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 header {
@@ -55,12 +65,6 @@ header {
     backdrop-filter: blur(10px);
     position: relative;
     z-index: 100;
-}
-
-main {
-    position: relative;
-    z-index: 1;
-    padding: 20px 30px;
 }
 
 .logo {
@@ -508,92 +512,91 @@ main {
 
 .slider-container {
     position: relative;
-    padding: 0 40px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    max-width: 1000px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .slider-track {
     display: flex;
     gap: 20px;
     transition: transform 0.5s ease;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 .fact-card {
+    flex: 0 0 calc(33.333% - 20px);
     background: rgba(255, 255, 255, 0.1);
     padding: 25px;
     border-radius: 16px;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 200px;
-    display: flex;
-    align-items: center;
-    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.fact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.15);
+@media (max-width: 1024px) {
+    .fact-card {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .fact-card {
+        flex: 0 0 calc(100% - 20px);
+    }
+    
+    .slider-container {
+        padding: 0 20px;
+    }
 }
 
 .fact-content {
-    width: 100%;
+    text-align: center;
 }
 
 .fact-icon {
-    font-size: 36px;
-    margin-bottom: 15px;
-    display: inline-block;
-    animation: float 3s ease-in-out infinite;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .fact-card h4 {
-    color: white;
-    font-size: 18px;
-    margin-bottom: 10px;
-    font-weight: 600;
+    color: #fff;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
 }
 
 .fact-card p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 15px;
-    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
     margin: 0;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .slider-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 2;
+    font-size: 1.2rem;
 }
 
 .slider-button:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .slider-button.prev {
@@ -604,35 +607,10 @@ main {
     right: 0;
 }
 
-@media (max-width: 768px) {
-    .slider-container {
-        padding: 0 30px;
-    }
-
-    .fact-card {
-        padding: 20px;
-        min-height: 180px;
-    }
-
-    .fact-icon {
-        font-size: 30px;
-        margin-bottom: 10px;
-    }
-
-    .fact-card h4 {
-        font-size: 16px;
-        margin-bottom: 8px;
-    }
-
-    .fact-card p {
-        font-size: 14px;
-    }
-
-    .slider-button {
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-    }
+.slider-button:disabled,
+.slider-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .nav-links {
@@ -918,4 +896,66 @@ main {
 .hourly-forecast-section,
 .forecast-section {
     animation: fadeIn 0.6s ease-out;
+}
+
+/* Footer Styles */
+.site-footer {
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 100%);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 2rem 0;
+    margin-top: 3rem;
+    width: 100%;
+    left: 0;
+    right: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.quote-container {
+    margin-bottom: 1.5rem;
+}
+
+.quote {
+    font-size: 1.2rem;
+    color: #fff;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quote-author {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.footer-info {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 1.5rem 0;
+    }
+    
+    .quote {
+        font-size: 1rem;
+    }
+    
+    .footer-content {
+        padding: 0 1rem;
+    }
 }

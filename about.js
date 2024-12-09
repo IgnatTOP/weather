@@ -14,7 +14,6 @@ class WeatherFactsSlider {
     validateElements() {
         this.track = document.querySelector('.slider-track');
         this.slides = document.querySelectorAll('.fact-card');
-        this.dotsContainer = document.querySelector('.slider-dots');
         this.prevButton = document.querySelector('.slider-button.prev');
         this.nextButton = document.querySelector('.slider-button.next');
 
@@ -34,29 +33,14 @@ class WeatherFactsSlider {
     }
 
     init() {
-        this.updateSlidesWidth();
         this.updateSlider();
         this.setupEventListeners();
         this.startAutoplay();
     }
 
-    updateSlidesWidth() {
-        const slideWidth = (100 / this.slidesPerView);
-        const marginWidth = 20;
-        
-        this.slides.forEach(slide => {
-            slide.style.flex = `0 0 calc(${slideWidth}% - ${marginWidth}px)`;
-        });
-    }
-
     setupEventListeners() {
-        this.prevButton.addEventListener('click', () => {
-            if (!this.isAnimating) this.slide('prev');
-        });
-        
-        this.nextButton.addEventListener('click', () => {
-            if (!this.isAnimating) this.slide('next');
-        });
+        this.prevButton.addEventListener('click', () => this.slide('prev'));
+        this.nextButton.addEventListener('click', () => this.slide('next'));
 
         let resizeTimeout;
         window.addEventListener('resize', () => {
@@ -65,10 +49,7 @@ class WeatherFactsSlider {
                 const newSlidesPerView = this.calculateSlidesPerView();
                 if (newSlidesPerView !== this.slidesPerView) {
                     this.slidesPerView = newSlidesPerView;
-                    this.updateSlidesWidth();
-                    if (this.currentSlide > this.totalSlides - this.slidesPerView) {
-                        this.currentSlide = Math.max(0, this.totalSlides - this.slidesPerView);
-                    }
+                    this.currentSlide = Math.min(this.currentSlide, this.totalSlides - this.slidesPerView);
                     this.updateSlider();
                 }
             }, 250);
@@ -91,7 +72,7 @@ class WeatherFactsSlider {
 
         this.track.addEventListener('touchend', () => {
             const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) { 
+            if (Math.abs(diff) > 50) {
                 if (diff > 0) {
                     this.slide('next');
                 } else {
@@ -103,19 +84,18 @@ class WeatherFactsSlider {
     }
 
     updateSlider() {
+        if (this.isAnimating) return;
+        
         this.isAnimating = true;
+        const translateX = -(this.currentSlide * (100 / this.slidesPerView));
+        this.track.style.transform = `translateX(${translateX}%)`;
         
-        const slideWidth = (100 / this.slidesPerView);
-        const marginOffset = (20 * this.currentSlide) / this.slidesPerView;
-        const offset = -(this.currentSlide * slideWidth) - marginOffset;
-        this.track.style.transform = `translateX(${offset}%)`;
+        // Update button states
+        const isStart = this.currentSlide === 0;
+        const isEnd = this.currentSlide >= this.totalSlides - this.slidesPerView;
         
-        this.prevButton.style.opacity = this.currentSlide === 0 ? '0.5' : '1';
-        this.prevButton.style.pointerEvents = this.currentSlide === 0 ? 'none' : 'auto';
-        
-        const lastPossibleSlide = this.totalSlides - this.slidesPerView;
-        this.nextButton.style.opacity = this.currentSlide >= lastPossibleSlide ? '0.5' : '1';
-        this.nextButton.style.pointerEvents = this.currentSlide >= lastPossibleSlide ? 'none' : 'auto';
+        this.prevButton.disabled = isStart;
+        this.nextButton.disabled = isEnd;
 
         setTimeout(() => {
             this.isAnimating = false;
@@ -140,8 +120,7 @@ class WeatherFactsSlider {
         if (this.autoplayInterval) this.stopAutoplay();
         
         this.autoplayInterval = setInterval(() => {
-            const lastPossibleSlide = this.totalSlides - this.slidesPerView;
-            if (this.currentSlide >= lastPossibleSlide) {
+            if (this.currentSlide >= this.totalSlides - this.slidesPerView) {
                 this.currentSlide = 0;
             } else {
                 this.currentSlide++;
